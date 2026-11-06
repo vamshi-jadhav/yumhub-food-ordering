@@ -1,0 +1,703 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="BiteBox - Order delicious food online.">
+
+    <title>BiteBox | Food Ordering Website</title>
+
+    <!-- CSS FILE -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- =================================
+         1. NAVBAR
+    ================================== -->
+
+    <header class="navbar">
+
+        <a href="#" class="logo">
+            Yum<span>Hub</span>
+        </a>
+
+        <nav>
+
+            <ul class="nav-links" id="navLinks">
+
+                <li><a href="#home">Home</a></li>
+
+                <li><a href="#menu">Menu</a></li>
+
+                <li><a href="#tracking">Track Order</a></li>
+
+                <li><a href="#contact">Contact</a></li>
+
+            </ul>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <button class="cart-button" id="cartButton">
+                🛒 Cart
+                <span id="cartCount">0</span>
+            </button>
+
+            <button class="menu-toggle" id="menuToggle">
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================
+         2. HERO SECTION
+    ================================== -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <h1>
+                Delicious Food,
+                <span>Delivered Fast!</span>
+            </h1>
+
+            <p>
+                Welcome to BiteBox! Discover your favourite
+                meals and enjoy delicious food delivered
+                straight to your doorstep.
+            </p>
+
+            <a href="#menu" class="hero-button">
+                Explore Menu
+            </a>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800"
+                alt="Delicious pizza"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         3. FOOD MENU SECTION
+    ================================== -->
+
+    <section class="menu-section" id="menu">
+
+        <div class="section-title">
+
+            <h2>Our Delicious Menu</h2>
+
+            <p>
+                Explore our delicious food collection.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH AND SORT -->
+
+        <div class="menu-tools">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="🔍 Search your favourite food..."
+                >
+
+            </div>
+
+            <select id="sortSelect">
+
+                <option value="default">
+                    Default Sorting
+                </option>
+
+                <option value="low">
+                    Price: Low to High
+                </option>
+
+                <option value="high">
+                    Price: High to Low
+                </option>
+
+                <option value="rating">
+                    Highest Rating
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- FOOD CATEGORIES -->
+
+        <div class="category-list" id="categoryList">
+
+            <button
+                class="active"
+                data-category="All"
+            >
+                All
+            </button>
+
+            <button data-category="Pizza">
+                🍕 Pizza
+            </button>
+
+            <button data-category="Burger">
+                🍔 Burger
+            </button>
+
+            <button data-category="Indian">
+                🍛 Indian
+            </button>
+
+            <button data-category="Dessert">
+                🍰 Dessert
+            </button>
+
+            <button data-category="Drinks">
+                🥤 Drinks
+            </button>
+
+        </div>
+
+
+        <!-- FOOD ITEMS WILL APPEAR HERE -->
+
+        <div class="food-grid" id="foodGrid">
+
+            <!-- JavaScript displays food cards here -->
+
+        </div>
+
+
+        <!-- NO RESULTS MESSAGE -->
+
+        <p id="noResults" hidden>
+            Sorry! No food items found.
+        </p>
+
+    </section>
+
+
+    <!-- =================================
+         4. ORDER TRACKING SECTION
+    ================================== -->
+
+    <section class="tracking-section" id="tracking">
+
+        <div class="section-title">
+
+            <h2>Track Your Order</h2>
+
+            <p>
+                Enter your order ID to check your order status.
+            </p>
+
+        </div>
+
+
+        <div class="tracking-container">
+
+
+            <!-- TRACKING FORM -->
+
+            <form class="tracking-form" id="trackingForm">
+
+                <input
+                    type="text"
+                    id="trackingOrderId"
+                    placeholder="Enter your Order ID"
+                    required
+                >
+
+                <button type="submit">
+                    Track Order
+                </button>
+
+            </form>
+
+
+            <button id="latestOrderBtn">
+                Track Latest Order
+            </button>
+
+
+            <!-- TRACKING MESSAGE -->
+
+            <p id="trackingMessage"></p>
+
+
+            <!-- TRACKING RESULT -->
+
+            <div class="tracking-result" id="trackingResult" hidden>
+
+
+                <!-- ORDER INFORMATION -->
+
+                <div class="tracking-order-info">
+
+                    <p>
+                        <strong>Order ID:</strong>
+
+                        <span id="displayOrderId"></span>
+                    </p>
+
+                    <p>
+                        <strong>Customer:</strong>
+
+                        <span id="trackingCustomer"></span>
+                    </p>
+
+                    <p>
+                        <strong>Total Amount:</strong>
+
+                        <span id="trackingTotal"></span>
+                    </p>
+
+                    <p>
+                        <strong>Delivery Address:</strong>
+
+                        <span id="trackingAddress"></span>
+                    </p>
+
+                    <p>
+                        <strong>Current Status:</strong>
+
+                        <span
+                            class="tracking-status-badge"
+                            id="trackingStatusBadge"
+                        ></span>
+                    </p>
+
+                </div>
+
+
+                <!-- ORDER TIMELINE -->
+
+                <div class="tracking-timeline">
+
+
+                    <div class="tracking-step" data-step="0">
+
+                        <p>Order Confirmed</p>
+
+                    </div>
+
+
+                    <div class="tracking-step" data-step="1">
+
+                        <p>Preparing Food</p>
+
+                    </div>
+
+
+                    <div class="tracking-step" data-step="2">
+
+                        <p>Out for Delivery</p>
+
+                    </div>
+
+
+                    <div class="tracking-step" data-step="3">
+
+                        <p>Delivered</p>
+
+                    </div>
+
+
+                </div>
+
+
+                <p id="trackingUpdated"></p>
+
+
+                <br>
+
+
+                <button id="advanceTrackingBtn" type="button">
+                    Advance Demo Status
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         5. PROMO SECTION
+    ================================== -->
+
+    <section class="promo-section">
+
+        <h2>Hungry? We've Got You Covered!</h2>
+
+        <p>
+            Order your favourite food today and enjoy
+            delicious meals at your doorstep.
+        </p>
+
+        <a href="#menu">
+            Order Now
+        </a>
+
+    </section>
+
+
+    <!-- =================================
+         6. FOOTER
+    ================================== -->
+
+    <footer class="footer" id="contact">
+
+        <h2>BiteBox</h2>
+
+        <p>
+            Delicious food, delivered with love.
+        </p>
+
+        <p>
+            Contact: support@bitebox.com
+        </p>
+
+        <p>
+            &copy; <span id="currentYear"></span>
+            BiteBox. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- =================================
+         7. CART OVERLAY
+    ================================== -->
+
+    <div
+        class="cart-overlay"
+        id="cartOverlay"
+    ></div>
+
+
+    <!-- =================================
+         8. CART DRAWER
+    ================================== -->
+
+    <div class="cart-drawer" id="cartDrawer">
+
+
+        <!-- CART HEADER -->
+
+        <div class="cart-header">
+
+            <h2>🛒 Your Cart</h2>
+
+            <button
+                class="close-cart"
+                id="closeCart"
+            >
+                &times;
+            </button>
+
+        </div>
+
+
+        <!-- CART ITEMS -->
+
+        <div class="cart-items" id="cartItems">
+
+            <!-- JavaScript adds cart items here -->
+
+        </div>
+
+
+        <!-- CART SUMMARY -->
+
+        <div class="cart-summary">
+
+            <p>
+                <span>Subtotal:</span>
+
+                <span id="subtotal">₹0.00</span>
+            </p>
+
+            <p>
+                <span>Delivery Fee:</span>
+
+                <span id="deliveryFee">₹0.00</span>
+            </p>
+
+            <p>
+                <span>Tax (5%):</span>
+
+                <span id="tax">₹0.00</span>
+            </p>
+
+            <p class="grand-total">
+
+                <span>Total:</span>
+
+                <span id="grandTotal">₹0.00</span>
+
+            </p>
+
+
+            <button
+                class="checkout-button"
+                id="checkoutButton"
+                disabled
+            >
+                Proceed to Checkout
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================
+         9. CHECKOUT MODAL
+    ================================== -->
+
+    <div
+        class="modal"
+        id="checkoutModal"
+        hidden
+    >
+
+        <div class="modal-content">
+
+
+            <!-- MODAL HEADER -->
+
+            <div class="modal-header">
+
+                <h2>Checkout</h2>
+
+                <button
+                    class="close-checkout"
+                    id="closeCheckout"
+                >
+                    &times;
+                </button>
+
+            </div>
+
+
+            <!-- CHECKOUT FORM -->
+
+            <form
+                class="checkout-form"
+                id="checkoutForm"
+            >
+
+
+                <!-- CUSTOMER NAME -->
+
+                <div>
+
+                    <label for="customerName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="Enter your name"
+                        required
+                        minlength="2"
+                    >
+
+                </div>
+
+
+                <!-- PHONE NUMBER -->
+
+                <div>
+
+                    <label for="customerPhone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="customerPhone"
+                        placeholder="Enter 10 digit phone number"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DELIVERY ADDRESS -->
+
+                <div>
+
+                    <label for="customerAddress">
+                        Delivery Address
+                    </label>
+
+                    <textarea
+                        id="customerAddress"
+                        placeholder="Enter your delivery address"
+                        required
+                        minlength="5"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- PAYMENT METHOD -->
+
+                <div>
+
+                    <label for="paymentMethod">
+                        Payment Method
+                    </label>
+
+                    <select
+                        id="paymentMethod"
+                        required
+                    >
+
+                        <option value="">
+                            Select Payment Method
+                        </option>
+
+                        <option value="Cash on Delivery">
+                            Cash on Delivery
+                        </option>
+
+                        <option value="UPI Demo">
+                            UPI (Demo)
+                        </option>
+
+                        <option value="Card Demo">
+                            Card (Demo)
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <p>
+                    <strong>
+                        Total Amount:
+                        <span id="checkoutTotal">₹0.00</span>
+                    </strong>
+                </p>
+
+
+                <!-- PLACE ORDER -->
+
+                <button type="submit">
+                    Place Order
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================
+         10. ORDER CONFIRMATION MODAL
+    ================================== -->
+
+    <div
+        class="modal"
+        id="confirmationModal"
+        hidden
+    >
+
+        <div class="modal-content confirmation-content">
+
+
+            <h2>🎉 Order Placed Successfully!</h2>
+
+
+            <p>
+                Thank you for ordering with BiteBox.
+            </p>
+
+
+            <p>
+                Your Order ID is:
+            </p>
+
+
+            <h3 id="confirmationOrderId"></h3>
+
+
+            <p>
+                You can use this ID to track your order.
+            </p>
+
+
+            <button id="trackNewOrderBtn">
+                Track My Order
+            </button>
+
+
+            <button id="continueShoppingBtn">
+                Continue Shopping
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================
+         11. TOAST MESSAGE
+    ================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    ></div>
+
+
+    <!-- =================================
+         12. JAVASCRIPT FILE
+    ================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+```
